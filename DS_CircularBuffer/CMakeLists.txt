@@ -1,0 +1,4 @@
+add_library(DS_CircularBuffer ds_circularbuffer.cpp)
+target_include_directories(DS_CircularBuffer INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+install(TARGETS DS_CircularBuffer DESTINATION lib)
+install(FILES DS_CircularBuffer DESTINATION include)

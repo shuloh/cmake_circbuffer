@@ -1,0 +1,4 @@
+//take CMake project version info
+
+#define VERSION_MAJOR @CircularBuffer_VERSION_MAJOR@
+#define VERSION_MINOR @CircularBuffer_VERSION_MINOR@
