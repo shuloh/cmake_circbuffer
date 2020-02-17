@@ -1,5 +1,7 @@
+#ifndef __CIRCULAR_BUFFER__
+#define __CIRCULAR_BUFFER__
+
 #include <memory>
-#include <mutex>
 template <typename T>
 class circular_buffer
 {
@@ -8,9 +10,10 @@ public:
                                             max_size_{size} {
 
                                             };
+
     void put(T item);
-    void put(T&& item);
-    T get() ;
+    void put(T &&item);
+    T get();
     void clear();
     bool empty() const;
     bool full() const;
@@ -18,10 +21,11 @@ public:
     size_t size() const;
 
 private:
-    std::mutex mutex_;
     std::unique_ptr<T[]> buf_;
     size_t head_ = 0;
     size_t tail_ = 0;
     const size_t max_size_;
     bool full_{false};
 };
+#include "ds_circularbuffer.cpp"
+#endif

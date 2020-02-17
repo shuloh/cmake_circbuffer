@@ -1,10 +1,9 @@
+#ifndef __CIRCULAR_BUFFER_IMPL__
+#define __CIRCULAR_BUFFER_IMPL__
 #include "ds_circularbuffer.h"
-#include <memory>
-#include <mutex>
 template <typename T>
 void circular_buffer<T>::clear()
 {
-    std::lock_guard<std::mutex> lock(mutex_);
     head_ = tail_;
     full_ = false;
 }
@@ -49,8 +48,8 @@ size_t circular_buffer<T>::size() const
 template <typename T>
 void circular_buffer<T>::put(T item)
 {
-    std::lock_guard<std::mutex> lock(mutex_);
-    if (full_) {
+    if (full_)
+    {
         tail_ = (tail_ + 1) % max_size_;
     }
     buf_[head_] = item;
@@ -61,8 +60,7 @@ void circular_buffer<T>::put(T item)
 template <typename T>
 T circular_buffer<T>::get()
 {
-    std::lock_guard<std::mutex> lock(mutex_);
-    if (empty()) 
+    if (empty())
     {
         return T();
     }
@@ -72,3 +70,4 @@ T circular_buffer<T>::get()
     full_ = false;
     return result;
 }
+#endif
